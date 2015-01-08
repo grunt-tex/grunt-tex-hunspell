@@ -10,7 +10,7 @@ var execOpts = {
 describe("When there are no spelling errors", function () {
 
   var out, code;
-  beforeEach(function (done) {
+  before(function (done) {
     exec("grunt hunspell:succeed", execOpts, function (_err, _out, _code) {
       out = strip(_out);
       code = _code;
@@ -37,7 +37,7 @@ describe("When there are no spelling errors", function () {
 describe("When there are spelling errors", function () {
 
   var out, code;
-  beforeEach(function (done) {
+  before(function (done) {
     exec("grunt hunspell:warn", execOpts, function (_err, _out, _code) {
       out = strip(_out);
       code = _code;

@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "0.10"
+before_install:
+  - npm install -g grunt-cli
+  - npm install
+  - sudo apt-get install libhunspell-dev hunspell-en-us
+install:
+  - PATH=$HOME/texlive/bin/x86_64-linux:$PATH
