@@ -1,4 +1,4 @@
-# grunt-tex-hunspell
+# grunt-tex-hunspell [![Build Status](https://travis-ci.org/grunt-tex/grunt-tex-hunspell.svg?branch=master)](https://travis-ci.org/grunt-tex/grunt-tex-pdflatex)
 
 Part of the [grunt-tex](https://github.com/grunt-tex) suite of LaTeX-orientated Grunt tasks.
 
