@@ -112,4 +112,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-* 2015-01-08   v0.1.0   Initial release
+* 2015-01-08   v0.1.1   Initial release
