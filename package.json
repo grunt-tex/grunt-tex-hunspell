@@ -1,7 +1,7 @@
 {
   "name": "grunt-tex-hunspell",
   "description": "Grunt hunspell task",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/grunt-tex/grunt-tex-hunspell",
   "author": {
     "name": "Oliver Woodings",
