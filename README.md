@@ -76,12 +76,12 @@ In this example, hunspell is used as a multitask, with custom options used for t
 grunt.initConfig({
   hunspell: {
     options: {
-      command: "/usr/bin/hunspell"
+      executable: "/usr/bin/hunspell"
     },
     documentone: {
       options: {
         args: {
-          "d": "en_US"
+          "-d": "en_US"
         }
       },
       files: [{ src: "documentone.tex" }]
@@ -99,7 +99,7 @@ grunt.initConfig({
   hunspell: {
     options: {
       args: {
-        "p": ".personal-dictionary"
+        "-p": ".personal-dictionary"
       }
     },
     files: [{ src: "document.tex" }]
