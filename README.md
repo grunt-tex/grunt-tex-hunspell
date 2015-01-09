@@ -47,12 +47,13 @@ If hunspell is not available on the command line as `hunspell`, put it's locatio
 
 #### options.args
 Type: `Object`
-Default value: `{ t: null, a: null }`
+Default value: `{ -t: null, -a: null }`
 
 An object of arguments to pass through to hunspell as command line options. Check the hunspell [man page](http://linux.die.net/man/1/hunspell) for all options. A few rules are applied to these arguments:
 
-* `-` is prepended to the key
-* If the value of a key is `null`, it will be treated a flag, i.e. it will be compiled as `-option` rather than `-option=null`
+* If the value of a key is `null`, it will be treated a flag, i.e. it will be compiled as `--option` rather than `--option=null`
+* If the key starts with `-` and has a value, ` ` will be used to separate the key and value
+* If the key starts with `--` and has a value, `=` will be used to separate the key and value
 
 Without changing any arguments, hunspell will be executed like so:
 
@@ -115,3 +116,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 * 2015-01-08   v0.1.1   Initial release
 * 2015-01-09   v0.2.0   Change argument configuration
 * 2015-01-09   v0.2.1   Update README
+* 2015-01-09   v0.2.2   Update README
