@@ -113,3 +113,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ## Release History
 
 * 2015-01-08   v0.1.1   Initial release
+* 2015-01-09   v0.2.0   Change argument configuration
+* 2015-01-09   v0.2.1   Update README
