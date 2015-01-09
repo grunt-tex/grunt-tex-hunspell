@@ -11,6 +11,7 @@ var lift = require("when/node").lift;
 var exec = lift(require("exec"));
 var _    = require("lodash-node");
 var path = require("path");
+var pad  = require("pad");
 
 require("colors");
 
@@ -27,21 +28,29 @@ module.exports = function(grunt) {
 
     // Collate arguments for hunspell
     var defaultArgs = {
-      "t": null,
-      "a": null
+      "-t": null,
+      "-a": null
     };
     var argsObj = _.extend(defaultArgs, options.args);
-    var args = _.map(argsObj, function (value, key) {
-      var argString = "-" + key;
+    var args = [options.executable];
+    _.each(argsObj, function (value, key) {
       if (value !== null) {
-        argString += "=" + value;
+        if (key.substr(0, 2) === "--") {
+          args.push(key + "=" + value);
+        } else {
+          args.push(key);
+          args.push(value);
+        }
+      } else {
+        args.push(key);
       }
-      return argString;
     });
-    args.unshift(options.executable);
 
     // Iterate over all specified files, executing hunspell on them
-    var promises = this.filesSrc.map(function (file) {
+    var promises = this.filesSrc
+      .filter(function (file) {
+        return file.indexOf("node_modules") === -1;
+      }).map(function (file) {
       return exec([].concat([], args, [file]))
         .spread(function (out, code) {
           // Return results as an object
@@ -51,7 +60,7 @@ module.exports = function(grunt) {
             code: code
           };
         });
-    });
+      });
 
     // When all files have been processed, indicate task has finished
     when.all(promises).then(function (results) {
@@ -66,6 +75,7 @@ module.exports = function(grunt) {
       grunt.log.error(result.out);
       grunt.fail.fatal("Unable to run spellcheck on " + result.file);
     } else {
+      var count = 0;
       _.chain(result.out.split("\n"))
         .reduce(function (report, line) {
           var command = line.substring(0, 1);
@@ -89,10 +99,11 @@ module.exports = function(grunt) {
           return report;
         }, {})
         .each(function (suggested, original) {
+          count++;
           var suggestedText = suggested.length === 0 ? "No suggestions".italic.red : suggested.join(", ").yellow;
-          grunt.log.warn("Original: " + original.cyan + " \t\tSuggested: " + suggestedText);
+          grunt.log.warn("Original: " + pad(original.cyan, 40) + " Suggested: " + suggestedText);
         });
-      grunt.log.ok("Spellcheck complete on " + result.file);
+      grunt.log.ok("Spellcheck complete on " + result.file + ". Errors: " + count);
     }
   }
 
